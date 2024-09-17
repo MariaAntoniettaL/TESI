@@ -281,57 +281,81 @@ def preprocessing_funct_not_enc(df):
     df_test.loc[df_test["native-country"].isin(list5), "native-country"] = " Other"
     df_val.loc[df_val["native-country"].isin(list5), "native-country"] = " Other"
     df_holdout.loc[df_holdout["native-country"].isin(list5), "native-country"] = " Other"
-    
+        
         
     return df_train, df_test, df_val, df_holdout
 
 
-'''def encoding_funct(df_train, df_test, df_val, df_holdout, categorical_cols):
+
+def encoding_funct(df_train, df_test, df_holdout, df_val):
     df_train_enc = df_train.copy()
     df_test_enc = df_test.copy()
     df_val_enc = df_val.copy()
     df_holdout_enc = df_holdout.copy()
-    # Initialize dictionaries
-    categorical_names = {}
-    le_dict = {}
-
-    # Ensure categorical_cols contains valid indices
-    for feature in categorical_cols:
-        if feature < len(df_train_enc.columns):  # Ensure the index is within the column range
-            le = LabelEncoder()
-            transformed_values = le.fit_transform(df_train_enc.iloc[:, feature])
-            df_train_enc.iloc[:, feature] = transformed_values
-            categorical_names[feature] = le.classes_
-            le_dict[feature] = le
-        else:
-            print(f"Index {feature} is out of bounds for columns in df_train_enc.")
-
-    # Print out the encoding details
-    for feature, classes in categorical_names.items():
-        print(f'Feature index {feature}: ')
-        print('Encoded values: ', list(range(len(classes))))
-        print('Original values: ', classes)
-        print()
-
-    # Handling non-categorical columns
-    non_categorical_cols = [i for i in range(len(df_train_enc.columns)) if i not in categorical_cols]
-
-    for col in non_categorical_cols:
-        le = LabelEncoder()
-        transformed_values = le.fit_transform(df_train_enc.iloc[:, col])
-        df_train_enc.iloc[:, col] = transformed_values
+    
+    dataframes = [df_train_enc, df_test_enc, df_val_enc, df_holdout_enc]
+    
+    le = LabelEncoder()
+    
+    workclass = ['Government', 'Self-emp', 'Private', 'Unknown', 'Never-worked', 'Without-pay']
+    le.fit(workclass)
+    for df in dataframes:
+        df['workclass'] = le.transform(df['workclass'])
+     
+    
+    education = ['Non Graduated', "Master's Degree", "Bachelor's Degree", 'Doctorate Degree']
+    le.fit(education)
+    for df in dataframes:
+        df['education'] = le.transform(df['education'])
+    
+    marital_status = ['Married', 'Widowed', 'Divorced', 'Never-married', 'Separated']
+    le.fit(marital_status)
+    for df in dataframes:
+        df['marital-status'] = le.transform(df['marital-status'])
         
-    return df_train_enc, df_test_enc, df_val_enc, df_holdout_enc
-    '''
+    occupation = ['Self-emp-occ', 'Private-occ', 'Prof-specialty', 'Government-occ', 'Unknown', 'Other-service']
+    le.fit(occupation)
+    for df in dataframes:
+        df['occupation'] = le.transform(df['occupation'])
 
-def get_original_label(column_name, encoded_value):
-        original_labels_dict = {
-        'workclass': ['Government', 'Never-worked', 'Private', 'Self-emp', 'Unknown', 'Without-pay'],
-        'education': ["Bachelor's Degree", 'Doctorate Degree', "Master's Degree", 'Non Graduated'],
-        'marital-status': ['Divorced', 'Married', 'Never-married', 'Separated', 'Widowed'],
-        'occupation': ['Self-emp-occ', 'Government-occ', 'Other-service', 'Private-occ', 'Prof-specialty', 'Unknown'],
-        'relationship': ['Husband', 'Not-in-family', 'Other-relative', 'Own-child', 'Unmarried', 'Wife'],
-        'race': ['Amer-Indian-Eskimo', 'Asian-Pac-Islander', 'Black', 'Other', 'White'],
-        'sex': ['Female', 'Male'],
-        'native-country': ['Other', 'African-American-Black', 'Asian', 'Caucasian-White', 'Latino-Hispanic']}
-        return original_labels_dict[column_name][encoded_value]
+    relationship = [' Not-in-family', ' Husband', ' Unmarried', ' Own-child', ' Wife', ' Other-relative']
+    le.fit(relationship)
+    for df in dataframes:
+        df['relationship'] = le.transform(df['relationship'])
+    
+    race = [' White', ' Black', ' Asian-Pac-Islander', ' Amer-Indian-Eskimo', ' Other']
+    le.fit(race)
+    for df in dataframes:
+        df['race'] = le.transform(df['race'])
+        
+    sex = [' Male', ' Female']
+    le.fit(sex)
+    for df in dataframes:
+        df['sex'] = le.transform(df['sex'])
+    
+    
+    native_country = [' African-American-Black', ' Other', ' Latino-Hispanic', ' Caucasian-White', ' Asian']
+    le.fit(native_country)
+    for df in dataframes:
+        df['native-country'] = le.transform(df['native-country'])
+        
+    age_group = ['17-24',  '25-34',  '35-44', '45-54', '55-64', '65-100']
+    le.fit(age_group)
+    for df in dataframes:
+        df['age_group'] = le.transform(df['age_group'])
+        
+    edu_num_group = ['1 Preschool', '2-3 Elementary School', '4-5 Middle School', '6-8 High School', '9 High School Graduate', '10 College', "11-12 Associate's Degree", "13 Bachelor's Degree", "14 Master's Degree", '15 Professional Degree', '16 Doctorate Degree']
+    le.fit(edu_num_group)
+    for df in dataframes:
+        df['edu_num_group'] = le.transform(df['edu_num_group'])
+    
+    hours_per_week_group = ['Part-time', 'Full-time', 'Overtime']
+    le.fit(hours_per_week_group)
+    for df in dataframes:
+        df['hours_per_week_group'] = le.transform(df['hours_per_week_group'])
+        
+    return(df_train_enc, df_test_enc, df_holdout_enc, df_val_enc)
+
+
+
+
