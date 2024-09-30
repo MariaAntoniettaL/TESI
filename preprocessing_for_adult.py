@@ -249,38 +249,44 @@ def preprocessing_funct_not_enc(df):
     #caucasian/white
     list1 = ['Germany', 'England', 'Scotland', 'France', 'Italy', 'Ireland', 'Greece', 'Poland', 'Portugal', 'Yugoslavia', 'Hungary']
 
-    df_train.loc[df_train["native-country"].isin(list1), "native-country"] = " Caucasian-White"
-    df_test.loc[df_test["native-country"].isin(list1), "native-country"] = " Caucasian-White"
-    df_val.loc[df_val["native-country"].isin(list1), "native-country"] = " Caucasian-White"
-    df_holdout.loc[df_holdout["native-country"].isin(list1), "native-country"] = " Caucasian-White"
+    df_train.loc[df_train["native-country"].isin(list1), "native-country"] = "Caucasian-White"
+    df_test.loc[df_test["native-country"].isin(list1), "native-country"] = "Caucasian-White"
+    df_val.loc[df_val["native-country"].isin(list1), "native-country"] = "Caucasian-White"
+    df_holdout.loc[df_holdout["native-country"].isin(list1), "native-country"] = "Caucasian-White"
 
-    #african american/black
-    list2 = ['United-States', 'Jamaica', 'Haiti', 'Trinadad&Tobago']
-    df_train.loc[df_train["native-country"].isin(list2), "native-country"] = " African-American-Black"
-    df_test.loc[df_test["native-country"].isin(list2), "native-country"] = " African-American-Black"
-    df_val.loc[df_val["native-country"].isin(list2), "native-country"] = " African-American-Black"
-    df_holdout.loc[df_holdout["native-country"].isin(list2), "native-country"] = " African-American-Black"
+    #african america
+    list6 = ['United-States']
+    df_train.loc[df_train["native-country"].isin(list6), "native-country"] = "United-States"
+    df_test.loc[df_test["native-country"].isin(list6), "native-country"] = "United-States"
+    df_val.loc[df_val["native-country"].isin(list6), "native-country"] = "United-States"
+    df_holdout.loc[df_holdout["native-country"].isin(list6), "native-country"] = "United-States"
+    
+    list2 = ['Jamaica', 'Haiti', 'Trinadad&Tobago']
+    df_train.loc[df_train["native-country"].isin(list2), "native-country"] = "Developing-Caribbean-Countries"
+    df_test.loc[df_test["native-country"].isin(list2), "native-country"] = "Developing-Caribbean-Countries"
+    df_val.loc[df_val["native-country"].isin(list2), "native-country"] = "Developing-Caribbean-Countries"
+    df_holdout.loc[df_holdout["native-country"].isin(list2), "native-country"] = "Developing-Caribbean-Countries"
 
     #latino/hispanic
     list3 = ['Peru', 'Mexico', 'Puerto-Rico', 'Guatemala', 'Honduras', 'El-Salvador', 'Nicaragua', 'Cuba', 'Dominican-Republic', 'Columbia', 'Ecuador']
-    df_train.loc[df_train["native-country"].isin(list3), "native-country"] = " Latino-Hispanic"
-    df_test.loc[df_test["native-country"].isin(list3), "native-country"] = " Latino-Hispanic"
-    df_val.loc[df_val["native-country"].isin(list3), "native-country"] = " Latino-Hispanic"
-    df_holdout.loc[df_holdout["native-country"].isin(list3), "native-country"] = " Latino-Hispanic"
+    df_train.loc[df_train["native-country"].isin(list3), "native-country"] = "Latino-Hispanic"
+    df_test.loc[df_test["native-country"].isin(list3), "native-country"] = "Latino-Hispanic"
+    df_val.loc[df_val["native-country"].isin(list3), "native-country"] = "Latino-Hispanic"
+    df_holdout.loc[df_holdout["native-country"].isin(list3), "native-country"] = "Latino-Hispanic"
 
     #Asian
     list4 = ['Thailand', 'Philippines', 'Vietnam', 'China', 'Japan', 'India', 'Taiwan', 'Cambodia', 'Laos' ]
-    df_train.loc[df_train["native-country"].isin(list4), "native-country"] = " Asian"
-    df_test.loc[df_test["native-country"].isin(list4), "native-country"] = " Asian"
-    df_val.loc[df_val["native-country"].isin(list4), "native-country"] = " Asian"
-    df_holdout.loc[df_holdout["native-country"].isin(list4), "native-country"] = " Asian"
+    df_train.loc[df_train["native-country"].isin(list4), "native-country"] = "Asian"
+    df_test.loc[df_test["native-country"].isin(list4), "native-country"] = "Asian"
+    df_val.loc[df_val["native-country"].isin(list4), "native-country"] = "Asian"
+    df_holdout.loc[df_holdout["native-country"].isin(list4), "native-country"] = "Asian"
 
     #Other
     list5 = ['Outlying-US(Guam-USVI-etc)', 'Iran', 'Unknown', 'Canada', 'South', 'Hong', 'Israel', 'Lebanon', 'Holand-Netherlands', 'Romania', 'Russia', 'Switzerland', 'Scotland'  ]
-    df_train.loc[df_train["native-country"].isin(list5), "native-country"] = " Other"
-    df_test.loc[df_test["native-country"].isin(list5), "native-country"] = " Other"
-    df_val.loc[df_val["native-country"].isin(list5), "native-country"] = " Other"
-    df_holdout.loc[df_holdout["native-country"].isin(list5), "native-country"] = " Other"
+    df_train.loc[df_train["native-country"].isin(list5), "native-country"] = "Other"
+    df_test.loc[df_test["native-country"].isin(list5), "native-country"] = "Other"
+    df_val.loc[df_val["native-country"].isin(list5), "native-country"] = "Other"
+    df_holdout.loc[df_holdout["native-country"].isin(list5), "native-country"] = "Other"
         
         
     return df_train, df_test, df_val, df_holdout
@@ -323,7 +329,7 @@ def encoding_funct(df_train, df_test, df_holdout, df_val):
     for df in dataframes:
         df['relationship'] = le.transform(df['relationship'])
     
-    race = [' White', ' Black', ' Asian-Pac-Islander', ' Amer-Indian-Eskimo', ' Other']
+    race = [' White' ,' Black', ' Asian-Pac-Islander', ' Amer-Indian-Eskimo', ' Other']
     le.fit(race)
     for df in dataframes:
         df['race'] = le.transform(df['race'])
@@ -334,7 +340,7 @@ def encoding_funct(df_train, df_test, df_holdout, df_val):
         df['sex'] = le.transform(df['sex'])
     
     
-    native_country = [' African-American-Black', ' Other', ' Latino-Hispanic', ' Caucasian-White', ' Asian']
+    native_country = ['United-States', 'Developing-Caribbean-Countries',  'Other', 'Latino-Hispanic', 'Caucasian-White', 'Asian']
     le.fit(native_country)
     for df in dataframes:
         df['native-country'] = le.transform(df['native-country'])
@@ -359,3 +365,182 @@ def encoding_funct(df_train, df_test, df_holdout, df_val):
 
 
 
+
+def metrics_to_compare(y_true, y_pred):
+    # Calcolo della matrice di confusione
+    tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+
+    # Calcolo delle metriche
+    accuracy = (tp + tn) / (tp + tn + fp + fn) if (tp + tn + fp + fn) > 0 else 0
+    fpr = fp / (fp + tn) if (fp + tn) > 0 else 0
+    fnr = fn / (fn + tp) if (fn + tp) > 0 else 0
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0
+    f1_score = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+    
+    # Ritorna tutte le metriche e i conteggi di FP e FN
+    return accuracy, f1_score, fpr, fnr, fp, fn
+
+
+
+
+
+
+
+
+
+'''
+
+#da provare 24 settembre: or tra righe and tra itemset stessa riga
+def K_subgroups_dataset_and_or(df_pruned, df_holdout, K):
+    itemsets = df_pruned['itemset'].head(K)
+    df_holdout_copy = df_holdout.copy()
+    righe_mantenute = pd.DataFrame()
+
+    for itemset in itemsets:
+        if itemset:
+            condizioni = dict([item.split('=') for item in itemset])
+            # Filtra per AND
+            df_filtrato = df_holdout_copy
+            for feature, valore in condizioni.items():
+                df_filtrato = df_filtrato[df_filtrato[feature].astype(str).str.strip() == valore.strip()]
+            
+            # Aggiungi righe trovate al dataframe mantenuto (OR tra itemset)
+            righe_mantenute = pd.concat([righe_mantenute, df_filtrato])
+
+    # Rimuovi duplicati se necessario
+    righe_mantenute = righe_mantenute.drop_duplicates()
+
+    return righe_mantenute
+
+
+
+
+# and tra tutti itemset
+def K_subgroups_dataset_and_and(df_pruned, df_holdout, K, N=None):
+   
+    itemsets = df_pruned['itemset'].head(K) # prime K righe dalla colonna 'itemset' di df_pruned
+
+    df_holdout_copy = df_holdout.copy() # per evitare modifiche all'originale
+
+    # Per ogni itemset, cerca il match e cancella la riga trovata in df_holdout_copy
+    for itemset in itemsets:
+        if itemset:  # Ignora itemset vuoti
+            # Converti il frozenset in un dizionario {feature: valore}
+            condizioni = dict([item.split('=') for item in itemset])
+
+            # Filtra il dataframe df_holdout_copy per tutte le coppie feature=valore
+            df_filtrato = df_holdout_copy
+            for feature, valore in condizioni.items():
+                # Filtra df_holdout_copy per ogni coppia feature=valore
+                df_filtrato = df_filtrato[df_filtrato[feature].astype(str).str.strip() == valore.strip()]
+
+            # Se ci sono righe trovate, prendi le prime N e cancellale
+            if not df_filtrato.empty:
+                # Se N è None, prendi tutte le righe trovate
+                if N is None:
+                    righe_da_prendere = df_filtrato
+                else:
+                    righe_da_prendere = df_filtrato.head(N)
+
+                # Elimina le righe trovate da df_holdout_copy
+                df_holdout_copy = df_holdout_copy.drop(righe_da_prendere.index)
+
+            #print(f"Itemset: {itemset}")
+            #print(f"Dati trovati nel df_holdout:\n{righe_da_prendere}\n")
+
+    return df_holdout_copy
+'''
+
+
+
+
+
+
+
+
+def K_subgroups_dataset_and_or(df_pruned, df_holdout, K):
+    # Prendi i primi K itemset dal dataframe df_pruned
+    itemsets = df_pruned['itemset'].head(K)
+    
+    # Crea una copia di df_holdout per non modificarlo direttamente
+    df_holdout_copy = df_holdout.copy()
+
+    # DataFrame vuoto per mantenere le righe che matchano
+    righe_mantenute = pd.DataFrame()
+
+    # Itera su ogni itemset e filtra df_holdout in base alle coppie feature=valore
+    for itemset in itemsets:
+        if itemset:  # Verifica che l'itemset non sia vuoto
+            # Estrai le coppie feature=valore direttamente dall'oggetto frozenset
+            condizioni = {feature_val.split('=')[0]: feature_val.split('=')[1] for feature_val in itemset}
+            
+            # Inizia con l'intero df_holdout_copy e applica il filtro per ogni coppia feature=valore
+            df_filtrato = df_holdout_copy
+            for feature, valore in condizioni.items():
+                df_filtrato = df_filtrato[df_filtrato[feature].astype(str).str.strip() == valore.strip()]
+
+            # Aggiungi le righe trovate al DataFrame righe_mantenute (logica OR tra itemset)
+            righe_mantenute = pd.concat([righe_mantenute, df_filtrato])
+
+    # Rimuovi eventuali duplicati se ci sono
+    righe_mantenute = righe_mantenute.drop_duplicates()
+
+    return righe_mantenute
+
+
+
+
+
+
+
+
+
+
+def K_subgroups_dataset_and_and(df_pruned, df_holdout, K):
+    # Prendi i primi K itemset dal dataframe df_pruned
+    itemsets = df_pruned['itemset'].head(K)
+    
+    # Crea una copia di df_holdout per non modificarlo direttamente
+    df_holdout_copy = df_holdout.copy()
+
+    # Inizialmente, considera tutte le righe di df_holdout
+    df_filtrato = df_holdout_copy
+
+    # Itera su ogni itemset e applica i filtri in AND (tutte le condizioni devono essere soddisfatte)
+    for itemset in itemsets:
+        if itemset:  # Verifica che l'itemset non sia vuoto
+            # Estrai le coppie feature=valore dall'itemset e crea un dizionario
+            condizioni = {feature_val.split('=')[0]: feature_val.split('=')[1] for feature_val in itemset}
+            
+            # Applica il filtro per ogni coppia feature=valore, restringendo ulteriormente df_filtrato
+            for feature, valore in condizioni.items():
+                df_filtrato = df_filtrato[df_filtrato[feature].astype(str).str.strip() == valore.strip()]
+            
+            # Se in qualsiasi momento non ci sono più righe che soddisfano tutte le condizioni, possiamo fermarci
+            if df_filtrato.empty:
+                break
+
+    return df_filtrato
+
+def filter_by_k_row(df_pruned, df_test, K):
+    # Estrai l'itemset dalla riga K
+    itemset = df_pruned['itemset'].iloc[K]  # K - 1 perché gli indici partono da 0
+    
+    if not itemset:  # Verifica che l'itemset non sia vuoto
+        return pd.DataFrame()  # Restituisce un DataFrame vuoto se non ci sono condizioni
+    
+    # Converti il frozenset in una stringa
+    itemset_str = ', '.join(itemset)
+    
+    # Estrai le coppie feature=valore dalla stringa
+    condizioni = {feature_val.split('=')[0]: feature_val.split('=')[1] for feature_val in itemset_str.split(', ')}
+
+    # Inizializza il DataFrame filtrato
+    df_filtrato = df_test.copy()
+
+    # Applica il filtro per ogni coppia feature=valore
+    for feature, valore in condizioni.items():
+        df_filtrato = df_filtrato[df_filtrato[feature].astype(str).str.strip() == valore.strip()]
+
+    return df_filtrato
